@@ -16,7 +16,7 @@ export class UserService {
   }
 
   login(user: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/user/login`, user);
+    return this.http.post(`${environment.apiUrl}/app/user/login`, user);
   }
 
   logout() {

@@ -26,6 +26,7 @@ module.exports = {
       },
       backgroundImage: {
         'gray-gradient': 'linear-gradient(to bottom, #E5E7EB, #4B5563)', // de bg-gray-200 a bg-gray-700
+        'custom-dark': '#03071e', // Define un nuevo color
       },
     },
   },

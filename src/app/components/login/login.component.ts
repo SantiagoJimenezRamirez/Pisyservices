@@ -37,11 +37,7 @@ export class LoginComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         }).then((result:any) => {
           if (result.isConfirmed) {
-            if (response.user.role === "ADMIN") {
               this.route.navigate(['/dashboard']); 
-            } else {
-              this.route.navigate(['/home']);
-            }
           }
         });
       },

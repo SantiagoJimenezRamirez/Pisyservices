@@ -6,6 +6,7 @@ import { ServicesComponent } from "../service/services.component";
 import { GeneralComponent } from "../general/general.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 import { OtherServicesComponent } from "../../other-services/other-services.component";
+import { DeviceInfoService } from '../../services/device-info.service';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,12 @@ export class HomeComponent implements OnInit {
   showProducts = false;
   
 
+  constructor(private _device: DeviceInfoService){
+
+  }
+
   ngOnInit(): void {
+    const deviceInfo = this._device.getDeviceInfo()
     setInterval(() => {
       this.activeIndex = (this.activeIndex + 1) % this.texts.length;
     }, 10000); // Cambia el texto cada 10 segundos
