@@ -1,0 +1,71 @@
+<div class="w-screen h-auto bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col px-6 sm:min-h-screen">
+  <!-- Título principal -->
+  <div class="flex-shrink-0 pt-6">
+    <h1 class="text-4xl font-bold text-gray-800 text-center mb-4 animate-fade-in">
+      Heavy-Duty Vehicle Electronics: <br> Innovation for Performance
+    </h1>
+    <!-- Separador decorativo -->
+    <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-gray-400 rounded-full mx-auto animate-slide-in"></div>
+  </div>
+
+<!-- Description -->
+<div class="flex-grow flex items-center justify-center px-6">
+  <div class="text-gray-700 text-center w-3/5 text-base leading-relaxed animate-fade-in-delay space-y-4">
+    <p>
+      Our company offers specialized services for both light and heavy vehicles, focusing on quality, innovation, 
+      and efficient solutions. Our team is trained to work with various brands and technologies, providing 
+      comprehensive support for all your needs.
+    </p>
+    <p>
+      With our expertise and dedication, we guarantee exceptional service that ensures reliability and optimal performance for your vehicle.
+    </p>
+  </div>
+</div>
+
+
+
+  <!-- Íconos y texto -->
+  <div class="flex justify-center items-end w-full pb-6 p-10  mb-5">
+      <!-- Diagnóstico -->
+      <div class="flex flex-col items-center space-y-2 transition-transform transform hover:scale-105 focus:outline-none cursor-pointer" (click)="showModalDiagnosis = true">
+        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+          <img src="img/diagnostico.png" alt="Diagnóstico" class="w-full h-full">
+        </div>
+        <span class="text-sm font-medium text-gray-700 hidden sm:block">DIAGNOSIS</span>
+      </div>
+      <!-- Reparación -->
+      <div class="flex flex-col items-center mx-20 space-y-2 transition-transform transform hover:scale-105 focus:outline-none cursor-pointer" (click)="showModalProgramming = true">
+        <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center">
+          <img src="img/reparacion.png" alt="Reparación" class="w-8 h-8">
+        </div>
+        <span class="text-sm font-medium text-gray-700 hidden sm:block">PROGRAMMING</span>
+      </div>
+      <!-- Mantenimiento -->
+      <div class="flex flex-col items-center space-y-2 transition-transform transform hover:scale-105 focus:outline-none cursor-pointer" (click)="showModalMaintace = true">
+        <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center">
+          <img src="img/mantenimiento.png" alt="Mantenimiento" class="w-8 h-8">
+        </div>
+        <span class="text-sm font-medium text-gray-700 hidden sm:block">MAINTENANCE</span>
+      </div>
+      <!-- Aprendizaje -->
+
+    </div>
+  </div>
+
+  <app-modal *ngIf="showModalDiagnosis"
+[title]="'DIAGNOSIS'"
+[imageUrl]="'img/Repair.png'"
+[description]="descriptionDiagnosis"
+(close)="showModalDiagnosis = false"></app-modal>
+
+<app-modal *ngIf="showModalProgramming"
+[title]="'PROGRAMMING'"
+[imageUrl]="'img/Repair.png'"
+[description]="descriptionDiagnosis"
+(close)="showModalProgramming = false"></app-modal>
+
+<app-modal *ngIf="showModalMaintace"
+[title]="'MAINTENANCE'"
+[imageUrl]="'img/Repair.png'"
+[description]="descriptionDiagnosis"
+(close)="showModalMaintace = false"></app-modal>

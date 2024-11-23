@@ -1,0 +1,32 @@
+<div class="h-auto flex justify-between bg-gray-800 p-4 text-lg px-10 drop-shadow-xl">
+    <button
+      (click)="setActiveSection('servicios')"
+      class="p-4 transition duration-300"
+      [ngClass]="{
+        'text-gray-400 pointer-events-none': activeSection === 'servicios',
+        'text-blue-600': activeSection !== 'servicios'
+      }">
+      Servicios
+    </button>
+  
+    <div
+      (click)="setActiveSection('logo')"
+      class="p-4 text-center transition duration-300 cursor-pointer"
+      [ngClass]="{
+        'text-gray-400 pointer-events-none': activeSection === 'logo',
+        'text-blue-600': activeSection !== 'logo'
+      }">
+      <img src="Logo.png" alt="Logo" class="w-20 h-20 mx-auto">
+    </div>
+  
+    <button
+      (click)="setActiveSection('productos')"
+      class="p-4 transition duration-300"
+      [ngClass]="{
+        'text-gray-400 pointer-events-none': activeSection === 'productos',
+        'text-blue-600': activeSection !== 'productos'
+      }">
+      Productos
+    </button>
+  </div>
+  
