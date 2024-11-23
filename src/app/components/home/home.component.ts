@@ -2,11 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from "../../shared/menu/menu.component";
-import { ServicesComponent } from "../services/services.component";
+import { ServicesComponent } from "../service/services.component";
 import { GeneralComponent } from "../general/general.component";
-import { ProductsComponent } from "../products/products.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
-import { ModalComponent } from "../modal/modal.component";
 import { OtherServicesComponent } from "../../other-services/other-services.component";
 
 @Component({
