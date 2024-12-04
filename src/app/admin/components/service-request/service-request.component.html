@@ -1,0 +1,130 @@
+<div class="w-screen h-screen flex bg-white max-w-screen overflow-hidden">
+    <div class="w-auto max-w-64 h-screen hidden sm:block">
+        <app-menu-admin></app-menu-admin>
+    </div>
+    <div class="w-full h-screen bg-gray-50 overflow-hidden flex flex-col">
+      <app-menu-cel class="sm:hidden"></app-menu-cel>
+
+        <!-- Header -->
+        <div class="w-full bg-white shadow-md p-6 border-b border-gray-200">
+          <h1 class="text-4xl font-bold text-blue-600 mb-2">
+            {{ title | titlecase }}
+          </h1>
+          <h2 class="text-lg font-medium text-gray-500">
+            Section of messages sent by users from the page
+          </h2>
+        </div>
+      
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto p-6">
+          <div class="relative overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
+            <table mat-table [dataSource]="dataSource" class="min-w-full">
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left font-semibold text-gray-700 bg-gray-100">
+                  Actions
+                </th>
+                <td mat-cell *matCellDef="let element" class="px-6 py-4">
+                  <button
+                    mat-icon-button
+                    (click)="toggleMenu(element.id)"
+                    class="focus:outline-none text-gray-500 hover:text-gray-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      width="24"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <circle cx="12" cy="5" r="2"></circle>
+                      <circle cx="12" cy="12" r="2"></circle>
+                      <circle cx="12" cy="19" r="2"></circle>
+                    </svg>
+                  </button>
+      
+                  <!-- Dropdown Menu -->
+                  <div
+                    *ngIf="activeMenu === element.id"
+                    (click)="$event.stopPropagation()"
+                    class="absolute mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded-lg z-50"
+                  >
+                    <button
+                      (click)="editElement(element)"
+                      class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 rounded-t"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      (click)="deleteElement(element)"
+                      class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 rounded-b"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+      
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left font-semibold text-gray-700 bg-gray-100">
+                  ID
+                </th>
+                <td mat-cell *matCellDef="let element" class="px-6 py-4 text-gray-600">
+                  {{ element.id }}
+                </td>
+              </ng-container>
+      
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left font-semibold text-gray-700 bg-gray-100">
+                  Name
+                </th>
+                <td mat-cell *matCellDef="let element" class="px-6 py-4 text-gray-600 truncate" title="{{ element.name }}">
+                  {{ element.name }}
+                </td>
+              </ng-container>
+      
+              <!-- Email Column -->
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left font-semibold text-gray-700 bg-gray-100">
+                  Email
+                </th>
+                <td mat-cell *matCellDef="let element" class="px-6 py-4 text-gray-600">
+                  {{ element.email }}
+                </td>
+              </ng-container>
+      
+              <!-- Message Column -->
+              <ng-container matColumnDef="message">
+                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left font-semibold text-gray-700 bg-gray-100">
+                  Message
+                </th>
+                <td mat-cell *matCellDef="let element" class="px-6 py-4 text-gray-600">
+                  {{ element.message }}
+                </td>
+              </ng-container>
+      
+              <!-- CreatedAt Column -->
+              <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left font-semibold text-gray-700 bg-gray-100">
+                  Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="px-6 py-4 text-gray-600">
+                  {{ element.createdAt | date }}
+                </td>
+              </ng-container>
+      
+              <!-- Table Header and Rows -->
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-gray-200 border-t"></tr>
+              <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumns;"
+                class="hover:bg-gray-50 transition-colors duration-200"
+              ></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+</div>

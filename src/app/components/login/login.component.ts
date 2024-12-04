@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this._userService.login(this.form.value).subscribe({
       next: (response:any) => {
+        localStorage.setItem('token', response.token)
         Swal.fire({
           title: 'Succescfull',
           text: response.msg,

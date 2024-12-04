@@ -11,7 +11,7 @@ import { TitleService } from '../../services/title.service';
   styleUrl: './menu-admin.component.scss'
 })
 export class MenuAdminComponent {
-  section = ["dashboard", "inventory", "view", "category", "shopping"]
+  section = ["dashboard", "inventory", "view", "category", "request"]
   sectionInfo = ["log-out"]
   selectedItem: string | null = null;
 
@@ -21,7 +21,6 @@ export class MenuAdminComponent {
 
   }
   getSvg(name: string){
-    console.log(`svg/${name}.svg`,)
     return `svg/${name}.svg`
   }
 

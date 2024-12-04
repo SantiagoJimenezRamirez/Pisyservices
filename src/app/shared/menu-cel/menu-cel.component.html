@@ -1,0 +1,34 @@
+<div class="w-full bg-blue-600 shadow-md flex items-center justify-between p-4">
+    <!-- Botón de menú -->
+    <button
+      (click)="toggleMenu()"
+      class="flex items-center space-x-2 text-white font-semibold focus:outline-none"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        class="stroke-white"
+      >
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>Menu</span>
+    </button>
+  
+    <!-- Menú desplegable -->
+    <div *ngIf="menuOpen" class="absolute top-16 left-4 bg-white shadow-lg rounded-lg z-50">
+      <ul class="flex flex-col p-2">
+        <li class="py-2 px-4 hover:bg-blue-100 cursor-pointer" (click)="navigateTo('dashboard')">Dashboard</li>
+        <li class="py-2 px-4 hover:bg-blue-100 cursor-pointer" (click)="navigateTo('inventory')">Inventory</li>
+        <li class="py-2 px-4 hover:bg-blue-100 cursor-pointer" (click)="navigateTo('view')">View</li>
+        <li class="py-2 px-4 hover:bg-blue-100 cursor-pointer" (click)="navigateTo('category')">Category</li>
+        <li class="py-2 px-4 hover:bg-blue-100 cursor-pointer" (click)="navigateTo('request')">Request</li>
+      </ul>
+    </div>
+  </div>
+  

@@ -2,7 +2,140 @@
     <div class="w-auto max-w-64 h-screen hidden sm:block">
         <app-menu-admin></app-menu-admin>
     </div>
-    <div class="w-full h-screen overflow-x-hidden overflow-y-auto">
+    <div class="w-full h-screen bg-gray-50 overflow-hidden flex flex-col">
+      <app-menu-cel class="sm:hidden"></app-menu-cel>
+
+      <!-- Header Section -->
+      <div class="w-full bg-white shadow p-6 border-b border-gray-200">
+        <h1 class="text-4xl font-bold text-blue-600 mb-2">{{ title | titlecase }}</h1>
+        <h2 class="text-lg text-gray-500">Devices that have entered the Page</h2>
+      </div>
     
+      <!-- Table Section -->
+      <div class="flex-1 overflow-y-auto p-6">
+        <div class="bg-white shadow-md rounded-lg border border-gray-200 overflow-x-auto">
+          <table mat-table [dataSource]="dataSource" class="min-w-full">
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                Actions
+              </th>
+              <td mat-cell *matCellDef="let element" class="py-3 px-6 relative">
+                <button
+                  mat-icon-button
+                  (click)="toggleMenu(element.id)"
+                  class="text-gray-500 hover:text-blue-600 focus:outline-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    width="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <circle cx="12" cy="19" r="2"></circle>
+                  </svg>
+                </button>
+    
+                <!-- Dropdown Menu -->
+                <div
+                  *ngIf="activeMenu === element.id"
+                  (click)="$event.stopPropagation()"
+                  class="absolute left-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded-lg z-50"
+                >
+                  <button
+                    (click)="editElement(element)"
+                    class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    (click)="deleteElement(element)"
+                    class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+    
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                ID
+              </th>
+              <td mat-cell *matCellDef="let element" class="py-3 px-6 text-gray-600">
+                {{ element.id }}
+              </td>
+            </ng-container>
+    
+            <!-- User Agent Column -->
+            <ng-container matColumnDef="userAgent">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                User Agent
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let element"
+                class="py-3 px-6 text-gray-600 truncate"
+                title="{{ element.userAgent }}"
+              >
+                {{ element.userAgent }}
+              </td>
+            </ng-container>
+    
+            <!-- Browser Column -->
+            <ng-container matColumnDef="browser">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                Browser
+              </th>
+              <td mat-cell *matCellDef="let element" class="py-3 px-6 text-gray-600">
+                {{ element.browser }}
+              </td>
+            </ng-container>
+    
+            <!-- Device Column -->
+            <ng-container matColumnDef="device">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                Device
+              </th>
+              <td mat-cell *matCellDef="let element" class="py-3 px-6 text-gray-600">
+                {{ element.device }}
+              </td>
+            </ng-container>
+    
+            <!-- OS Column -->
+            <ng-container matColumnDef="os">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                OS
+              </th>
+              <td mat-cell *matCellDef="let element" class="py-3 px-6 text-gray-600">
+                {{ element.os }}
+              </td>
+            </ng-container>
+    
+            <!-- Date Column -->
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef class="py-3 px-6 bg-gray-100 text-left font-semibold text-gray-700">
+                Date
+              </th>
+              <td mat-cell *matCellDef="let element" class="py-3 px-6 text-gray-600">
+                {{ element.createdAt | date }}
+              </td>
+            </ng-container>
+    
+            <!-- Table Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-gray-200 border-b"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns;"
+              class="hover:bg-gray-50 transition-colors"
+            ></tr>
+          </table>
+        </div>
+      </div>
     </div>
+    
 </div>

@@ -1,0 +1,90 @@
+<!-- Modal Overlay con efecto de blur -->
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50"
+>
+  <!-- Modal -->
+  <div
+    class="bg-white w-11/12 max-w-lg p-6 rounded-lg shadow-lg relative"
+  >
+    <!-- Botón para cerrar -->
+    <button
+      class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none"
+      (click)="closeModal()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor">
+        <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <!-- Título del formulario -->
+    <h2 class="text-2xl font-bold text-blue-600 mb-4">Add New Product</h2>
+
+    <!-- Formulario reactivo -->
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <!-- Nombre -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-2" for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter product name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-red-500 text-sm">
+          Name is required.
+        </div>
+      </div>
+
+      <!-- Precio -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-2" for="price">Price</label>
+        <input
+          id="price"
+          type="number"
+          formControlName="price"
+          placeholder="Enter product price"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-red-500 text-sm">
+          Price is required.
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-2" for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Enter product description"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        ></textarea>
+        <div
+          *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+          class="text-red-500 text-sm"
+        >
+          Description is required.
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-end space-x-4">
+        <button
+          type="button"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          [disabled]="productForm.invalid"
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

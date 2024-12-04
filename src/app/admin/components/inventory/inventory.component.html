@@ -2,7 +2,134 @@
     <div class="w-auto max-w-64 h-screen hidden sm:block">
         <app-menu-admin></app-menu-admin>
     </div>
-    <div class="w-full h-screen overflow-x-hidden overflow-y-auto">
+    <div class="w-full h-screen overflow-x-hidden overflow-y-hidden">
+      
+      <app-menu-cel class="sm:hidden"></app-menu-cel>
+      <!-- Header Section -->
+      <div class="w-full bg-white shadow p-6 border-b border-gray-200">
+        <h1 class="text-4xl font-bold text-blue-600 mb-2">Products</h1>
+        <h2 class="text-lg text-gray-500">Product form</h2>
+      </div>
     
-    </div>
+      <!-- Add Button Section -->
+      <div class="w-full p-6 flex justify-end items-center bg-gray-50">
+        <button
+          title="Add New"
+          class="group relative flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 focus:outline-none transition-all"
+          (click)="openModal = true"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28px"
+            height="28px"
+            viewBox="0 0 24 24"
+            class="group-hover:scale-110 transition-transform duration-300"
+          >
+            <path
+              d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+              fill="none"
+            ></path>
+            <path d="M8 12H16" stroke="currentColor" stroke-width="1.5"></path>
+            <path d="M12 16V8" stroke="currentColor" stroke-width="1.5"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="flex-1 overflow-y-auto p-6">
+        <div class="bg-white shadow-md rounded-lg border border-gray-200 overflow-x-auto">
+          <!-- Contenedor de la tabla desplazable -->
+          <div class="overflow-y-auto max-h-[500px]">
+            <table class="min-w-full">
+              <!-- Table Header -->
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Actions</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">ID</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Name</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Price</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Description</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Image</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Date</th>
+                </tr>
+              </thead>
+      
+              <!-- Table Body -->
+              <tbody>
+                <tr
+                  *ngFor="let element of dataSource"
+                  class="hover:bg-gray-50 transition-colors border-b"
+                >
+                  <!-- Actions Column -->
+                  <td class="py-3 px-6 relative">
+                    <button
+                      (click)="toggleMenu(element.id, $event)"
+                      class="text-gray-500 hover:text-blue-600 focus:outline-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        width="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                        <circle cx="12" cy="19" r="2"></circle>
+                      </svg>
+                    </button>
+      
+                    <!-- Dropdown Menu -->
+                    <div
+                      *ngIf="activeMenu === element.id"
+                      (click)="$event.stopPropagation()"
+                      class="absolute left-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded-lg z-50"
+                    >
+                      <button
+                        (click)="handleEdit(element)"
+                        class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        (click)="deleteProduct(element)"
+                        class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+      
+                  <!-- ID Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.id }}</td>
+      
+                  <!-- Name Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.name }}</td>
+      
+                  <!-- Price Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.price | currency }}</td>
+      
+                  <!-- Description Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.description }}</td>
+      
+                  <!-- Image Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.imagePath }}</td>
+      
+                  <!-- Date Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.createdAt | date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>      
+    <!-- Table Section -->
+
+
 </div>
+<app-product-add *ngIf="openModal"
+(modal)="reciveEvent($event)"></app-product-add>
+
+<app-product-edit *ngIf="openEditModal"
+[data]="data"
+(close)="reciveEditEvent($event)"></app-product-edit>

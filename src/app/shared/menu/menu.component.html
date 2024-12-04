@@ -1,12 +1,12 @@
 <div class="h-auto flex justify-between bg-gray-800 p-4 text-lg px-10 drop-shadow-xl">
     <button
-      (click)="setActiveSection('servicios')"
+      (click)="setActiveSection('asistencias')"
       class="p-4 transition duration-300"
       [ngClass]="{
-        'text-gray-400 pointer-events-none': activeSection === 'servicios',
-        'text-blue-600': activeSection !== 'servicios'
+        'text-gray-400 pointer-events-none': activeSection === 'asistencias',
+        'text-blue-600': activeSection !== 'asistencias'
       }">
-      Servicios
+      Asistencias
     </button>
   
     <div
@@ -20,13 +20,13 @@
     </div>
   
     <button
-      (click)="setActiveSection('productos')"
+      (click)="setActiveSection('servicios')"
       class="p-4 transition duration-300"
       [ngClass]="{
-        'text-gray-400 pointer-events-none': activeSection === 'productos',
-        'text-blue-600': activeSection !== 'productos'
+        'text-gray-400 pointer-events-none': activeSection === 'servicios',
+        'text-blue-600': activeSection !== 'servicios'
       }">
-      Productos
+      Servicios
     </button>
   </div>
   

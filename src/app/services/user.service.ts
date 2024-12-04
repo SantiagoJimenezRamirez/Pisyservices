@@ -9,6 +9,8 @@ import { environment } from '../enviroments/enviroment.prod';
   providedIn: 'root'
 })
 export class UserService {
+  private isAuthenticated = false;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   register(user: any): Observable<any> {
@@ -32,7 +34,9 @@ export class UserService {
     return this.http.get(`${environment.apiUrl}/api/user/${id}`);
   }
 
-  isLoggedIn() {
-    return localStorage.getItem('token');
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    this.isAuthenticated = !!token;
+    return !!token; // Verifica si hay un token
   }
 }

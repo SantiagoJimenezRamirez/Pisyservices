@@ -5,16 +5,20 @@ import { DashboardComponent } from './admin/components/dashboard/dashboard.compo
 import { InventoryComponent } from './admin/components/inventory/inventory.component';
 import { ViewComponent } from './admin/components/view/view.component';
 import { CategoryComponent } from './admin/components/category/category.component';
-import { ShoppingComponent } from './admin/components/shopping/shopping.component';
+import { HomeEsComponent } from './components/home-es/home-es.component';
+import { ServiceRequestComponent } from './admin/components/service-request/service-request.component';
+import { LoginGuard } from './guards/login-guard.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirige a /login en la ruta raíz
-    // { path: 'pruebas', component: ,  },
-    { path: 'home', component: HomeComponent, },  
-    { path: 'login', component: LoginComponent, },  
-    { path: 'dashboard', component: DashboardComponent, },  
-    { path: 'inventory', component: InventoryComponent, },  
-    { path: 'view', component: ViewComponent, },  
-    { path: 'category', component: CategoryComponent, },  
-    { path: 'shopping', component: ShoppingComponent, },  
-]
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'home/es', component: HomeEsComponent },
+    { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'request', component: ServiceRequestComponent, canActivate: [AuthGuard] },
+    { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+    { path: 'view', component: ViewComponent, canActivate: [AuthGuard] },
+    { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
+    { path: '**', redirectTo: '/home' },
+  ];

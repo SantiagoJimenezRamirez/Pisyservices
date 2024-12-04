@@ -1,14 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { UAParser } from 'ua-parser-js';
+import { environment } from '../enviroments/enviroment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceInfoService {
 
-  constructor() {}
+  constructor(private http: HttpClient, 
+    private router: Router) {}
 
-  getDeviceInfo(): { browser: string; os: string; device: string; userAgent: string } {
+  getDeviceInfo(): any {
     const parser = new UAParser();
     
     // Parseamos los datos
@@ -24,7 +28,15 @@ export class DeviceInfoService {
       device: `${device.vendor || 'Desconocido'} ${device.model || ''} (${device.type || 'desktop'})`,
       userAgent: userAgent,
     };
-
+    console.log(deviceInfo)
     return deviceInfo;
+  }
+
+  getAll():any{
+    return this.http.get(`${environment.apiUrl}/app/session/findAll`);
+  }
+
+  add(session:any):any{
+    return this.http.post(`${environment.apiUrl}/app/session/create`, session);
   }
 }

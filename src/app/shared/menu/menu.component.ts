@@ -10,9 +10,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class MenuComponent {
   @Output() sectionSelected = new EventEmitter<string>();
-  activeSection: 'servicios' | 'logo' | 'productos' = 'logo';
+  activeSection: 'asistencias' | 'logo' | 'servicios' = 'logo';
 
-  setActiveSection(section: 'servicios' | 'logo' | 'productos') {
+  setActiveSection(section: 'asistencias' | 'logo' | 'servicios') {
     this.activeSection = section;
     this.sectionSelected.emit(section); // Emitimos la sección seleccionada
   }

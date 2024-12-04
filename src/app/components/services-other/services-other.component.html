@@ -1,0 +1,52 @@
+<div class="w-screen h-auto bg-gray-50 py-12 px-6">
+    <!-- TÃ­tulo de la secciÃ³n -->
+    <h2 class="text-3xl font-semibold text-gray-800 text-center mb-8">Our Products</h2>
+    
+    <!-- Carrusel de productos -->
+    <div class="relative group">
+      <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+        <!-- Producto generado dinÃ¡micamente con ngFor -->
+        <div 
+          *ngFor="let product of data" 
+          class="relative w-64 h-80 snap-center flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden"
+        >
+          <img [src]="product.imageUrl" [alt]="product.dataValues.name" class="w-full h-full object-cover">
+          <!-- Detalles al hacer hover -->
+          <div class="absolute inset-0 bg-black bg-opacity-60 text-white flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity px-4 text-center duration-300">
+            <h3 class="text-lg font-semibold">{{ product.dataValues.name }}</h3>
+            <p class="text-sm mt-2 px-4 text-center">{{ product.dataValues.description }}</p>
+            <p class="text-sm mt-2 px-4 text-center text-[#3a86ff]">{{ formatNumberWithThousandsSeparator(product.dataValues.price) }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Botones de navegaciÃ³n -->
+      <button class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 text-white rounded-full p-2 hover:bg-opacity-100 transition-opacity duration-300 hidden group-hover:block">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 text-white rounded-full p-2 hover:bg-opacity-100 transition-opacity duration-300 hidden group-hover:block">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+
+<!-- <div class="p-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        *ngFor="let item of data"
+        class="bg-white rounded-lg shadow-md overflow-hidden"
+      >
+      <img [src]="item.imageUrl" alt="{{ item.dataValues.name }}" width="200" height="200">
+        <div class="p-4">
+          <h2 class="font-bold text-lg mb-2">{{ item.dataValues.title }}</h2>
+          <p class="text-gray-600">{{ item.dataValues.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
