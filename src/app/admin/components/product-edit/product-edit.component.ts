@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import Swal from 'sweetalert2';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -16,10 +17,12 @@ export class ProductEditComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>();
   isModalOpen = true; // Controla la visibilidad del modal
   productForm: FormGroup;
+  categories:any;
 
-  constructor(private fb: FormBuilder, private _productService:ProductService) {
+  constructor(private fb: FormBuilder, private _productService:ProductService, private _categoryServices: CategoryService) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
+      category: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
     });
@@ -61,6 +64,12 @@ export class ProductEditComponent implements OnInit {
         },
         error: (erro:any) =>{
           console.log(erro)
+        }
+      })
+
+      this._categoryServices.getCategories().subscribe({
+        next : (response:any) => {
+          this.categories = response.categories;
         }
       })
       console.log('Form Submitted:', this.productForm.value);

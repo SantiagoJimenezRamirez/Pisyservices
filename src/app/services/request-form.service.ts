@@ -13,10 +13,10 @@ export class RequestFormService {
     private router: Router) {}
 
     getAll(): Observable<any>{
-    return this.http.get(`${environment.apiUrl}/app/services/service-requests`);
+    return this.http.get(`${environment.apiUrl}/api/service-requests`);
     }
 
     add(form:any): Observable<any>{
-    return this.http.post(`${environment.apiUrl}/app/services/service-requests`, {form});
+    return this.http.post(`${environment.apiUrl}/api/service-requests`, {form});
     }
 }

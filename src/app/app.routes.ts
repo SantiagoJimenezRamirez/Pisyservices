@@ -9,10 +9,12 @@ import { HomeEsComponent } from './components/home-es/home-es.component';
 import { ServiceRequestComponent } from './admin/components/service-request/service-request.component';
 import { LoginGuard } from './guards/login-guard.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { ProductsComponent } from './components/products/products.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'pruebas', component: ProductsComponent },
     { path: 'home/es', component: HomeEsComponent },
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },

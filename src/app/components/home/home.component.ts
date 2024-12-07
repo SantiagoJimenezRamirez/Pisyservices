@@ -10,11 +10,12 @@ import { DeviceInfoService } from '../../services/device-info.service';
 import { RequestFormService } from '../../services/request-form.service';
 import Swal from 'sweetalert2';
 import { ServicesOtherComponent } from "../services-other/services-other.component";
+import { ProductsComponent } from "../products/products.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MenuComponent, ServicesComponent, ReactiveFormsModule, GeneralComponent, FooterComponent, OtherServicesComponent, ServicesOtherComponent],
+  imports: [CommonModule, MenuComponent, ServicesComponent, ReactiveFormsModule, GeneralComponent, FooterComponent, OtherServicesComponent, ServicesOtherComponent, ProductsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

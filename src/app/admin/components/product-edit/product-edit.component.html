@@ -36,6 +36,29 @@
         </div>
       </div>
 
+      <!-- Category Field -->
+      <div class="mb-4">
+        <label for="category" class="block text-sm font-medium text-gray-700">
+          Category
+        </label>
+        <select
+          id="category"
+          formControlName="category"
+          class="w-full mt-1 p-2 border border-gray-300 rounded focus:ring focus:ring-blue-300 focus:outline-none"
+        >
+          <option value="">Select a category</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <p
+          *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+          class="text-red-500 text-sm"
+        >
+          Category is required
+        </p>
+      </div>
+
       <!-- Precio -->
       <div class="mb-4">
         <label class="block text-gray-700 font-semibold mb-2" for="price">Price</label>

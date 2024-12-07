@@ -33,7 +33,8 @@ export class ViewComponent implements OnInit{
   ngOnInit(): void {
     this._sessionService.getAll().subscribe({
       next: (response:any) =>{
-        this.data = response?.session || [];
+        this.data = response?.sessions || [];
+        console.log(this.data)
         this.dataSource = new MatTableDataSource(this.data);
       }
     })

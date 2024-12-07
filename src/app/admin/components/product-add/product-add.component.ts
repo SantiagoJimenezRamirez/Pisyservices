@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import Swal from 'sweetalert2';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-product-add',
@@ -17,16 +18,23 @@ export class ProductAddComponent implements OnInit {
   productForm: FormGroup;
   isModalOpen = false; // Controla el estado del modal
   selectedFile: File | null = null; // Imagen seleccionada
+  categories:any;
 
-  constructor(private fb: FormBuilder, private productService:ProductService) {
+  constructor(private fb: FormBuilder, private productService:ProductService, private _categoryServices: CategoryService) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
+      category: ['', Validators.required],
       price: [null, [Validators.required, Validators.min(0.01)]],
       description: ['', Validators.required],
       imagePath: [null],
     });
   }
   ngOnInit(): void {
+    this._categoryServices.getCategories().subscribe({
+      next : (response:any) => {
+        this.categories = response.categories;
+      }
+    })
 
   }
 
@@ -40,9 +48,11 @@ export class ProductAddComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0];
+      console.log('Archivo seleccionado:', this.selectedFile); // Depuración
       this.productForm.patchValue({ imagePath: this.selectedFile });
     }
   }
+  
 
   // Enviar formulario
   onSubmit(): void {
@@ -53,9 +63,10 @@ export class ProductAddComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('name', this.productForm.get('name')?.value);
+    formData.append('category', this.productForm.get('category')?.value);
     formData.append('price', this.productForm.get('price')?.value);
     formData.append('description', this.productForm.get('description')?.value);
-    formData.append('file', this.selectedFile);
+    formData.append('image', this.selectedFile);
 
     this.productService.createProduct(formData).subscribe({
       next: (response:any) => {

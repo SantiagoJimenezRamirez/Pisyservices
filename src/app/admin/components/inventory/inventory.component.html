@@ -47,6 +47,7 @@
                   <th class="py-3 px-6 text-left font-semibold text-gray-700">Actions</th>
                   <th class="py-3 px-6 text-left font-semibold text-gray-700">ID</th>
                   <th class="py-3 px-6 text-left font-semibold text-gray-700">Name</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Category</th>
                   <th class="py-3 px-6 text-left font-semibold text-gray-700">Price</th>
                   <th class="py-3 px-6 text-left font-semibold text-gray-700">Description</th>
                   <th class="py-3 px-6 text-left font-semibold text-gray-700">Image</th>
@@ -105,6 +106,9 @@
       
                   <!-- Name Column -->
                   <td class="py-3 px-6 text-gray-600">{{ element.name }}</td>
+
+                  <!-- Category Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.category }}</td>
       
                   <!-- Price Column -->
                   <td class="py-3 px-6 text-gray-600">{{ element.price | currency }}</td>
@@ -116,7 +120,7 @@
                   <td class="py-3 px-6 text-gray-600">{{ element.imagePath }}</td>
       
                   <!-- Date Column -->
-                  <td class="py-3 px-6 text-gray-600">{{ element.createdAt | date }}</td>
+                  <td class="py-3 px-6 text-gray-600">{{ element.updated_at | date }}</td>
                 </tr>
               </tbody>
             </table>

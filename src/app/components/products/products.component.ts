@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ProductService } from '../../services/product.service';
+import { CategoryService } from '../../services/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -9,44 +12,48 @@ import { Component } from '@angular/core';
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
-  products = [
-    {
-      id: 1,
-      name: 'Monitor DH5 Model 2539-1068',
-      description: `The "Monitor DH5 Model 2539-1068" appears to refer to an LCD display screen used in heavy machinery, specifically for models such as the Daewoo Doosan DH220-5 and DH220-V excavators.`,
-      image: 'https://via.placeholder.com/256x320'
-    },
-    {
-      id: 2,
-      name: 'Monitor DH5 Model 2539-1068',
-      description: `The "Monitor DH5 Model 2539-1068" appears to refer to an LCD display screen used in heavy machinery, specifically for models such as the Daewoo Doosan DH220-5 and DH220-V excavators.`,
-      image: 'https://via.placeholder.com/256x320'
-    },
-    {
-      id: 3,
-      name: 'Monitor DH5 Model 2539-1068',
-      description: `The "Monitor DH5 Model 2539-1068" appears to refer to an LCD display screen used in heavy machinery, specifically for models such as the Daewoo Doosan DH220-5 and DH220-V excavators.`,
-      image: 'https://via.placeholder.com/256x320'
-    },
-    {
-      id: 4,
-      name: 'Monitor DH5 Model 2539-1068',
-      description: `The "Monitor DH5 Model 2539-1068" appears to refer to an LCD display screen used in heavy machinery, specifically for models such as the Daewoo Doosan DH220-5 and DH220-V excavators.`,
-      image: 'https://via.placeholder.com/256x320'
-    },
-    {
-      id: 5,
-      name: 'Monitor DH5 Model 2539-1068',
-      description: `The "Monitor DH5 Model 2539-1068" appears to refer to an LCD display screen used in heavy machinery, specifically for models such as the Daewoo Doosan DH220-5 and DH220-V excavators.`,
-      image: 'https://via.placeholder.com/256x320'
-    },
-    {
-      id: 6,
-      name: 'Monitor DH5 Model 2539-1068',
-      description: `The "Monitor DH5 Model 2539-1068" appears to refer to an LCD display screen used in heavy machinery, specifically for models such as the Daewoo Doosan DH220-5 and DH220-V excavators.`,
-      image: 'https://via.placeholder.com/256x320'
-    },
-  ];
-  
+  products: any[] = [];
+  filteredProducts: any[] = [];
+  categories: any[] = []; // Lista de categorías únicas
 
+  constructor(private productService: ProductService, private _categoriesServices: CategoryService) {}
+
+  ngOnInit(): void {
+    this.productService.getAll().subscribe({
+      next: (response: any) => {
+        this.products = response.products;
+        this.filteredProducts = response.products;
+      }
+    });
+    this._categoriesServices.getCategories().subscribe({
+      next: (response: any) => {
+        this.categories.push(...response.categories);
+          }
+        });
+    console.log(this.categories)
+  }
+
+  filterProducts(category: string): void {
+    this.filteredProducts = category
+      ? this.products.filter((product: any) => product.category === category)
+      : this.products;
+  }
+
+  confirmProductInterest(product: any) {
+    Swal.fire({
+      title: '¿Desea consultar con la empresa sobre este producto?',
+      text: `Producto: ${product.name}`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, contactar',
+      cancelButtonText: 'No, gracias',
+    }).then(result => {
+      if (result.isConfirmed) {
+        const message = `Estoy interesado en el producto: ${product.name}`;
+        const phoneNumber = '+1 3478991749'; // Sustituye con el número de WhatsApp de la empresa.
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+      }
+    });
+  }
 }

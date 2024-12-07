@@ -33,10 +33,10 @@ export class DeviceInfoService {
   }
 
   getAll():any{
-    return this.http.get(`${environment.apiUrl}/app/session/findAll`);
+    return this.http.get(`${environment.apiUrl}/api/session`);
   }
 
   add(session:any):any{
-    return this.http.post(`${environment.apiUrl}/app/session/create`, session);
+    return this.http.post(`${environment.apiUrl}/api/session`, session);
   }
 }
