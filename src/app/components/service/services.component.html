@@ -1,10 +1,10 @@
-<div class="min-h-screen flex flex-col items-center bg-gray-100 ">
-  <h1 class="text-4xl font-bold mt-8 mb-4 animate-fade-in">Nuestros Servicios</h1>
+<div class="min-h-screen flex flex-col items-center bg-gray-100 overflow-hidden">
+  <h1 class="text-4xl font-bold mt-8 mb-4 animate-fade-in">Our Sevices</h1>
   <p class="text-lg mb-6 text-center max-w-lg animate-fade-in">
-    Aquí puedes encontrar información sobre los servicios que ofrecemos. ¡Estamos para ayudarte!
+    Here you can find information about the services we offer. We are here to help you!
   </p>
   <div
-    class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl px-4 animate-fade-in">
+    class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl px-4 overflow-y-auto animate-fade-in">
     <div
       *ngFor="let service of services"
       class="bg-white text-gray-800 rounded-lg shadow-lg p-6 hover:scale-105 transition-transform duration-300 ease-out"
@@ -20,6 +20,6 @@
     *ngIf="!services.length"
     class="flex items-center justify-center flex-grow text-xl text-center animate-pulse"
   >
-    No hay servicios disponibles en este momento.
+  There are no services available at this time.
   </div>
 </div>

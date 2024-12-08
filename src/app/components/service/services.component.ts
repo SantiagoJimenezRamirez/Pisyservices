@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { ServicesService } from '../../services/services.service';
 
 @Component({
   selector: 'app-services',
@@ -9,26 +10,22 @@ import Swal from 'sweetalert2';
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss'
 })
-export class ServicesComponent {
+export class ServicesComponent implements OnInit {
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  services: any;
+
+  constructor(private cdr: ChangeDetectorRef, private _servicesServices : ServicesService) {}
+
+  ngOnInit(): void {
+    this._servicesServices.getAll().subscribe({
+      next : (response : any) => {
+        this.services = response
+      }
+    })
+  }
 
   whatsappNumber: string = '573001234567';
 
-  services = [
-    {
-      title: 'Desarrollo Web',
-      description: 'Creación de sitios y aplicaciones web personalizadas.'
-    },
-    {
-      title: 'Consultoría Tecnológica',
-      description: 'Asesoramiento en la implementación de soluciones tecnológicas.'
-    },
-    {
-      title: 'Soporte Técnico',
-      description: 'Resolución de problemas y mantenimiento de sistemas.'
-    }
-  ];
 redirectToWhatsApp(service: { title: string; description: string }): void {
     Swal.fire({
       title: '¿Estás seguro?',

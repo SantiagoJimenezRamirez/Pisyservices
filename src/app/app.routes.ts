@@ -10,6 +10,8 @@ import { ServiceRequestComponent } from './admin/components/service-request/serv
 import { LoginGuard } from './guards/login-guard.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { ProductsComponent } from './components/products/products.component';
+import { ServicesAdminComponent } from './admin/components/services-admin/services-admin.component';
+import { OperationsComponent } from './admin/components/operations/operations.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,6 +22,8 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'request', component: ServiceRequestComponent, canActivate: [AuthGuard] },
     { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+    { path: 'services', component: ServicesAdminComponent, canActivate: [AuthGuard] },
+    { path: 'operations', component: OperationsComponent, canActivate: [AuthGuard] },
     { path: 'view', component: ViewComponent, canActivate: [AuthGuard] },
     { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/home' },

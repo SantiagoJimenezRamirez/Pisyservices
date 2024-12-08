@@ -6,14 +6,15 @@ import { ServicesComponent } from '../service/services.component';
 import { GeneralComponent } from '../general/general.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { OtherServicesComponent } from '../../other-services/other-services.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RequestFormService } from '../../services/request-form.service';
 import Swal from 'sweetalert2';
+import { ProductsComponent } from "../products/products.component";
 
 @Component({
   selector: 'app-home-es',
   standalone: true,
-  imports: [CommonModule, MenuComponent, ServicesComponent, GeneralComponent, FooterComponent, OtherServicesComponent],
+  imports: [CommonModule, MenuComponent, ServicesComponent, GeneralComponent, FooterComponent, OtherServicesComponent, ProductsComponent, ReactiveFormsModule],
   templateUrl: './home-es.component.html',
   styleUrl: './home-es.component.scss'
 })
@@ -82,7 +83,7 @@ export class HomeEsComponent {
       this.showServices = true;
       this.showInfo =false;
       this.showProducts = false;
-    }else if( section == "productos"){
+    }else if( section == "asistencias"){
       this.showServices = false;
       this.showInfo =false;
       this.showProducts = true;

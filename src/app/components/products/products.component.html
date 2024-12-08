@@ -1,29 +1,31 @@
 <div class="w-screen h-screen flex flex-col">
   <!-- Contenedor de botones de filtro -->
-  <div class="flex justify-center gap-4 p-4 bg-white overflow-x-auto sm:h-40">
+  <div class="flex items-center justify-center gap-4 p-4 bg-white overflow-x-auto whitespace-nowrap">
     <button
       *ngFor="let category of categories"
       (click)="filterProducts(category.name)"
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-all"
     >
       {{ category.name }}
     </button>
     <button
       (click)="filterProducts('')"
-      class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+      class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600 transition-all"
     >
       Mostrar todos
     </button>
   </div>
 
   <!-- Contenedor de productos -->
-  <div class="flex flex-wrap justify-center overflow-auto p-4">
+  <div class="flex-grow flex flex-wrap justify-center overflow-auto p-4 bg-gray-100">
     <div
       *ngFor="let product of filteredProducts"
-      class="w-full md:w-1/2 lg:w-1/3 p-2"
+      class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-3"
       (click)="confirmProductInterest(product)"
     >
-      <div class="border border-gray-300 rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 bg-white">
+      <div
+        class="border border-gray-300 rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 bg-white"
+      >
         <img
           [src]="product.imagePath"
           alt="{{ product.name }}"
