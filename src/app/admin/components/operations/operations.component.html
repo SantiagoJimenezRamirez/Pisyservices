@@ -34,6 +34,97 @@
           </svg>
         </button>
       </div>
+      <div class="flex-1 overflow-y-auto p-6">
+        <div class="bg-white shadow-md rounded-lg border border-gray-200 overflow-x-auto">
+          <!-- Contenedor de la tabla desplazable -->
+          <div class="overflow-y-auto max-h-[500px]">
+            <table class="min-w-full">
+              <!-- Table Header -->
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Actions</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">ID</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Name</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Category</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Price</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Description</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Image</th>
+                  <th class="py-3 px-6 text-left font-semibold text-gray-700">Date</th>
+                </tr>
+              </thead>
+      
+              <!-- Table Body -->
+              <tbody>
+                <tr
+                  *ngFor="let element of dataSource"
+                  class="hover:bg-gray-50 transition-colors border-b"
+                >
+                  <!-- Actions Column -->
+                  <td class="py-3 px-6 relative">
+                    <button
+                      (click)="toggleMenu(element.id, $event)"
+                      class="text-gray-500 hover:text-blue-600 focus:outline-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        width="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                        <circle cx="12" cy="19" r="2"></circle>
+                      </svg>
+                    </button>
+      
+                    <!-- Dropdown Menu -->
+                    <div
+                      *ngIf="activeMenu === element.id"
+                      (click)="$event.stopPropagation()"
+                      class="absolute left-0 mt-2 w-40 bg-white border border-gray-300 shadow-lg rounded-lg z-50"
+                    >
+                      <button
+                        (click)="handleEdit(element)"
+                        class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        (click)="deleteProduct(element)"
+                        class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+      
+                  <!-- ID Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.id }}</td>
+      
+                  <!-- Name Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.name }}</td>
+
+                  <!-- Category Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.category }}</td>
+      
+                  <!-- Price Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.price | currency }}</td>
+      
+                  <!-- Description Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.description }}</td>
+      
+                  <!-- Image Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.imagePath }}</td>
+      
+                  <!-- Date Column -->
+                  <td class="py-3 px-6 text-gray-600">{{ element.updated_at | date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>      
     </div>
 </div>  
 

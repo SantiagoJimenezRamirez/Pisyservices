@@ -18,4 +18,16 @@ export class OperationsService {
     getAll(){
       return this.http.get(`${environment.apiUrl}/api/operations`);
     }
+
+    getById(id:number){
+      return this.http.get(`${environment.apiUrl}/api/operations${id}`);
+    }
+
+    uodate(id:number, form:any){
+      return this.http.post(`${environment.apiUrl}/api/operations${id}`, {form});
+    }
+
+    delete(id:number){
+      return this.http.delete(`${environment.apiUrl}/api/operations${id}`);
+    }
 }
